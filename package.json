@@ -6,7 +6,8 @@
   "scripts": {
     "build": "gulp",
     "dev": "gulp watch",
-    "clean": "gulp clean"
+    "clean": "gulp clean",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "davidalves1 <alves.david@outlook.com>",
