@@ -37,9 +37,6 @@ export function Contact() {
       >
         Contact
       </h2>
-      <p className="font-sans text-base text-muted leading-[1.7] max-w-[65ch] mb-12">
-        Open to interesting problems and good collaborations.
-      </p>
       <ul className="space-y-4 list-none m-0 p-0">
         {links.map((link) => (
           <li key={link.label}>
