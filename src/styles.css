@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors — OKLCH, warm amber-tinted dark surface */
+  --color-canvas: oklch(11% 0.008 55);
+  --color-surface: oklch(17% 0.007 55);
+  --color-border: oklch(26% 0.006 55);
+  --color-fg: oklch(91% 0.01 55);
+  --color-muted: oklch(52% 0.007 55);
+  --color-accent: oklch(73% 0.14 70);
+
+  /* Fonts */
+  --font-sans: "Barlow", system-ui, sans-serif;
+  --font-serif: "Source Serif 4", Georgia, serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: oklch(11% 0.008 55);
+  color: oklch(91% 0.01 55);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  font-family: "Barlow", system-ui, sans-serif;
+  background-color: oklch(11% 0.008 55);
+}
+
+::selection {
+  background-color: oklch(73% 0.14 70 / 0.25);
+  color: oklch(91% 0.01 55);
+}
