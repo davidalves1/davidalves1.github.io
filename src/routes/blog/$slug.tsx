@@ -1,11 +1,27 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { getPostBySlug } from "#/data/posts";
+import { getPostBySlug } from "#/lib/posts";
+import { SITE_URL } from "#/lib/site";
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: ({ params }) => {
     const post = getPostBySlug(params.slug);
     if (!post) throw notFound();
     return post;
+  },
+  head: ({ loaderData }) => {
+    if (!loaderData) return {};
+    const url = `${SITE_URL}/blog/${loaderData.slug}`;
+    return {
+      meta: [
+        { title: `${loaderData.title} — David Alves` },
+        { name: "description", content: loaderData.excerpt },
+        { property: "og:title", content: loaderData.title },
+        { property: "og:description", content: loaderData.excerpt },
+        { property: "og:type", content: "article" },
+        { property: "og:url", content: url },
+      ],
+      links: [{ rel: "canonical", href: url }],
+    };
   },
   component: BlogPost,
   notFoundComponent: PostNotFound,
@@ -27,7 +43,7 @@ function BlogPost() {
         <article className="max-w-[65ch]">
           <header className="mb-12">
             <p className="font-sans text-xs font-medium tracking-[0.12em] uppercase text-muted mb-4">
-              {post.date}
+              {post.displayDate}
             </p>
             <h1
               className="font-serif font-bold text-fg leading-[1.05]"
@@ -38,9 +54,10 @@ function BlogPost() {
             <hr className="border-0 border-t border-border mt-8" />
           </header>
 
-          <div className="font-sans text-base text-fg leading-[1.75] space-y-6 whitespace-pre-line">
-            {post.content}
-          </div>
+          <div
+            className="prose prose-invert max-w-none font-sans text-fg prose-headings:font-serif prose-headings:text-fg prose-a:text-accent prose-strong:text-fg prose-pre:bg-transparent prose-pre:p-0 prose-pre:rounded-none prose-code:text-fg prose-blockquote:border-border prose-blockquote:text-muted"
+            dangerouslySetInnerHTML={{ __html: post.html }}
+          />
         </article>
       </div>
     </main>

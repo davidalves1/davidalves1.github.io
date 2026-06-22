@@ -24,19 +24,18 @@ export function Nav() {
           davidalves1
         </a>
         <ul className="flex items-center gap-8 list-none m-0 p-0">
-          {/* <li>
-            <Link
-              to="/blog"
-              className="font-sans text-sm text-muted hover:text-fg transition-colors duration-150"
-            >
+          <li>
+            <Link to="/" className="font-sans text-sm text-muted hover:text-fg transition-colors duration-150">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link to="/blog" className="font-sans text-sm text-muted hover:text-fg transition-colors duration-150">
               Blog
             </Link>
-          </li> */}
+          </li>
           <li>
-            <a
-              href="/#contact"
-              className="font-sans text-sm text-muted hover:text-fg transition-colors duration-150"
-            >
+            <a href="/#contact" className="font-sans text-sm text-muted hover:text-fg transition-colors duration-150">
               Contact
             </a>
           </li>

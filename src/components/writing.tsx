@@ -1,8 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { posts } from "#/data/posts";
+import { getAllPosts } from "#/lib/posts";
 
 export function Writing() {
-  const preview = posts.slice(0, 3);
+  const preview = getAllPosts().slice(0, 3);
 
   return (
     <section id="blog" className="py-24 px-6 max-w-5xl mx-auto">
@@ -24,7 +24,7 @@ export function Writing() {
               {post.title}
             </span>
             <span className="font-sans text-xs text-muted tracking-wide ml-8 shrink-0">
-              {post.date}
+              {post.displayDate}
             </span>
           </Link>
         ))}

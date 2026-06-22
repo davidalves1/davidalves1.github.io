@@ -1,12 +1,21 @@
 import { useState } from 'react'
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { posts } from '#/data/posts'
+import { getAllPosts } from '#/lib/posts'
 
-export const Route = createFileRoute('/blog/')({ component: BlogIndex })
+export const Route = createFileRoute('/blog/')({
+  head: () => ({
+    meta: [
+      { title: 'Blog — David Alves' },
+      { name: 'description', content: 'Writing on software, systems, and craft.' },
+    ],
+  }),
+  component: BlogIndex,
+})
 
 const POSTS_PER_PAGE = 5
 
 function BlogIndex() {
+  const posts = getAllPosts()
   const [page, setPage] = useState(1)
   const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE)
   const visible = posts.slice((page - 1) * POSTS_PER_PAGE, page * POSTS_PER_PAGE)
@@ -33,7 +42,7 @@ function BlogIndex() {
                 {post.title}
               </span>
               <span className="font-sans text-xs text-muted tracking-wide ml-8 shrink-0">
-                {post.date}
+                {post.displayDate}
               </span>
             </Link>
           ))}
