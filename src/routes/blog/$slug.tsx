@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { getPostBySlug } from "#/lib/posts";
 import { SITE_URL } from "#/lib/site";
+import { ShareButtons } from "#/components/share-buttons";
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: ({ params }) => {
@@ -29,6 +30,7 @@ export const Route = createFileRoute("/blog/$slug")({
 
 function BlogPost() {
   const post = Route.useLoaderData();
+  const url = `${SITE_URL}/blog/${post.slug}`;
 
   return (
     <main className="pt-14">
@@ -53,6 +55,10 @@ function BlogPost() {
             </h1>
             <hr className="border-0 border-t border-border mt-8" />
           </header>
+
+          <div className="mb-10">
+            <ShareButtons title={post.title} excerpt={post.excerpt} url={url} />
+          </div>
 
           <div
             className="prose prose-invert max-w-none font-sans text-fg prose-headings:font-serif prose-headings:text-fg prose-a:text-accent prose-strong:text-fg prose-pre:bg-transparent prose-pre:p-0 prose-pre:rounded-none prose-code:text-fg prose-blockquote:border-border prose-blockquote:text-muted"
